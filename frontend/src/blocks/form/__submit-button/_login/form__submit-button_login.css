@@ -1,0 +1,19 @@
+.form__submit-button_login {
+    margin: 173px auto 77px auto;
+    width: 260px;
+    height: 46px;
+    padding: 0;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .form__submit-button_login {
+        margin: 216px auto 112px auto;
+        width: 358px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+}

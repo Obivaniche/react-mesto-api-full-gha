@@ -1,0 +1,6 @@
+.profile__container {
+    grid-area: avatar;
+    display: flex;
+    width: 120px;
+    margin: auto;
+}

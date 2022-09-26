@@ -1,0 +1,43 @@
+.profile {
+    max-width: 320px;
+    margin: auto;
+    padding: 42px 0 0 0;
+    display: -ms-grid;
+    display: grid;
+        grid-template-areas: ". avatar ."
+                         ". name edit"
+                         "about about about"
+                         "add add add";
+    -ms-grid-columns: 1fr 189px 1fr;
+    grid-template-columns: 1fr 189px 1fr;
+}
+
+@media screen and (min-width: 640px) {
+
+    .profile {
+        max-width: 581px;
+        padding: 42px 0 0 0;
+            grid-template-areas:
+        "avatar name edit add"
+        "avatar about about add";
+        -ms-grid-columns: 120px 225px 1fr 150px;
+        grid-template-columns: 120px 225px 1fr 150px;
+        -ms-grid-rows: 70px 1fr;
+        grid-template-rows: 70px 1fr;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+
+    .profile {
+        max-width: 880px;
+        padding: 0;
+            grid-template-areas:
+        "avatar name edit add"
+        "avatar about about add";
+        -ms-grid-columns: 150px 312px 1fr 150px;
+        grid-template-columns: 150px 312px 1fr 150px;
+        -ms-grid-rows: 110px 1fr;
+        grid-template-rows: 110px 1fr;
+    }
+}

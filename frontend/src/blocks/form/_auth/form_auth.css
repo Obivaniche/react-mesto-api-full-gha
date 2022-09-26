@@ -1,0 +1,11 @@
+.form_auth {
+    width: 260px;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .form_auth {
+        width: 358px;
+    }
+
+}

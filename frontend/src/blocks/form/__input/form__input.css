@@ -1,0 +1,16 @@
+.form__input {
+    padding: 0 0 10px 0;
+    width: 238px;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0, .2);
+}
+
+@media screen and (min-width: 1280px) {
+
+    .form__input {
+        width: 358px;
+    }
+
+}

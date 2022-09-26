@@ -1,0 +1,21 @@
+.form__submit-button_auth {
+    margin: 173px auto 0 auto;
+    padding: 0;
+    width: 260px;
+    height: 46px;
+    font-size: 16px;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .form__submit-button_auth {
+        margin: 216px auto 0 auto;
+        padding: 0;
+        width: 358px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+}

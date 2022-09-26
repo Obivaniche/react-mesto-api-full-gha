@@ -1,0 +1,21 @@
+.profile__avatar {
+    grid-area: avatar;
+    display: block;
+    margin: 0 auto 0 auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+    position: relative;
+    z-index: 0;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .profile__avatar {
+        margin: 40px 0 0 0;
+    }
+}

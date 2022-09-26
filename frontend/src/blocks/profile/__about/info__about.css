@@ -1,0 +1,31 @@
+.profile__about {
+    grid-area: about;
+    width: 282px;
+    text-align: center;
+    margin: 14px auto 0 auto;
+    font-size: 14px;
+    color: #FFFF;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 640px) {
+
+    .profile__about {
+        width: 189px;
+        margin: 6px auto 0 25px;
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+
+    .profile__about {
+        width: 282px;
+        margin: 6px 0 0 0px;
+        font-size: 18px;
+        text-align: left;
+    }
+}

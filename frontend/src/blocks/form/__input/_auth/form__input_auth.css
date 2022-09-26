@@ -1,0 +1,16 @@
+.form__input_auth {
+    width: 260px;
+    background-color: transparent;
+    border: none;
+    padding: 0 0 11px 0;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .form__input_auth {
+        width: 358px;
+    }
+
+}

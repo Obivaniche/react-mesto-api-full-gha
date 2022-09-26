@@ -1,0 +1,12 @@
+.form__field_auth {
+    margin: 0 auto 28px auto;
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.form__field_auth:first-of-type {
+    margin: 50px auto 28px auto;
+}
+
+.form__field_auth:last-of-type {
+    margin: 0 auto;
+}

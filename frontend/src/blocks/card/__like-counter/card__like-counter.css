@@ -1,0 +1,6 @@
+.card__like-counter {
+    grid-area: like;
+    margin: 44px 28px 22px auto;
+    font-size: 13px;
+    line-height: 13px;
+}

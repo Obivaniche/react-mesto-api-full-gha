@@ -1,0 +1,22 @@
+.auth__link {
+    margin: 20px auto 40px auto;
+    padding: 0;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    transition: opacity 0s, .2s ease-in;
+}
+
+.auth__link:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .auth__link {
+        margin: 15px auto 80px auto;
+        font-size: 14px;
+    }
+
+}

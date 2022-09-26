@@ -1,0 +1,31 @@
+.profile__avatar-button {
+    grid-area: avatar;
+    margin: 0 auto 0 auto;
+    padding: 0;
+    border: none;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    background-image: url(../../../images/avatar_edit.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, .8);
+    cursor: pointer;
+    -webkit-transition: opacity .4s linear;
+    -o-transition: opacity .4s linear;
+    transition: opacity .4s linear;
+    opacity: 0;
+}
+
+.profile__avatar-button:hover {
+    opacity: 1;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .profile__avatar-button {
+        margin: 40px 0 0 0;
+    }
+}

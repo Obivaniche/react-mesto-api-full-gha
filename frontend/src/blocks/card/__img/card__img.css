@@ -1,0 +1,10 @@
+.card__img {
+    grid-area: img;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+    width: 282px;
+    height: 282px;
+    cursor: pointer;
+}

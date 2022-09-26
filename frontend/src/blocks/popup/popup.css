@@ -1,0 +1,23 @@
+.popup {
+    font-family: 'inter', 'Helvetica Neue', Arial, sans-serif;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    visibility: hidden;
+    -webkit-transition: visibility 0s, .2s ease-in;
+    -o-transition: visibility 0s, .2s ease-in;
+    transition: visibility 0s, .2s ease-in;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
