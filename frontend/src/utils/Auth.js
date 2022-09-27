@@ -10,24 +10,24 @@ class Auth {
         return Promise.reject(`Ошибка: ${res.status}`);
     };
 
-  login(password, email) {
+  login(email, password) {
       return fetch(`${this._url}/signin`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({password, email})
+          body: JSON.stringify({email, password})
       })
       .then((res) => this._checkResponse(res))
   };
 
-  register(password, email) {
+  register(email, password) {
       return fetch(`${this._url}/signup`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({password, email})
+          body: JSON.stringify({email, password})
       })
       .then((res) => this._checkResponse(res))
   };
@@ -47,6 +47,6 @@ class Auth {
   } 
 };
 
-const auth = new Auth('http://api.obivaniche.nomoredomains.sbs/');
+const auth = new Auth('https://api.obivaniche.nomoredomains.sbs');
 
 export default auth;

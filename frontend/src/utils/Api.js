@@ -91,7 +91,7 @@ class Api {
 let token = localStorage.getItem('jwt');
 
 const api = new Api({
-    url: 'http://api.obivaniche.nomoredomains.sbs/',
+    url: 'https://api.obivaniche.nomoredomains.sbs',
     headers: {
       'authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
