@@ -63,13 +63,13 @@ function App() {
           localStorage.setItem("jwt", data.token);
           setUserEmail(email);
         }
-        setIsSuccess(true);
-        setIsInfoToolTipOpen(true);
+        setIsSuccess(true)
+        setIsInfoTooltipOpen(true)
       })
       .catch((err) => {
-        console.log(err);
-        setIsSuccess(false);
-        setIsInfoToolTipOpen(true);
+        console.log(err)
+        setIsSuccess(false)
+        setIsInfoTooltipOpen(true)
       });
   };
 
