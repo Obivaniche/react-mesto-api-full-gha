@@ -8,8 +8,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.105.144
+IP 51.250.105.144
 
-Frontend http://obivaniche.nomoredomains.sbs/
+Frontend https://obivaniche.nomoredomains.sbs/
 
-Backend http://api.obivaniche.nomoredomains.sbs/
+Backend https://api.obivaniche.nomoredomains.sbs/
