@@ -1,11 +1,9 @@
 import React from 'react';
 import logo from '../images/logo.svg';
-import { useLocation, Link, Switch, Route } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
 
 
 function Header(props) {
-
-  const location = useLocation();
 
   return (
     <header className="header">
