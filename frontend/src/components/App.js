@@ -10,13 +10,12 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
 import ProtectedRoute from "./ProtectedRoute";
-import auth from '../utils/Auth'
+import auth from '../utils/Auth';
 
 function App() {
 
@@ -40,8 +39,8 @@ function App() {
     about: '...',
   });
 
-  function onLogin(password, email) {
-    auth.login(password, email)
+  function onLogin(email, password) {
+    auth.login({ email, password })
       .then((res) => {
         if (res) {
           setLoggedIn(true);
@@ -100,16 +99,16 @@ function App() {
 
   function getInitialCards() {
     api.getInitialCards()
-      .then((res) => {
-        setCards(res);
+      .then(([userCard]) => {
+        setCards(userCard);
       })
       .catch((err) => console.log(err));
   };
 
   function getUserInfo() {
     api.getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
+      .then(([userData]) => {
+        setCurrentUser(userData);
       })
       .catch((err) => console.log(err));
   };
@@ -161,7 +160,7 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api.toggleLikeStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));

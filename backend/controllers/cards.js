@@ -5,9 +5,7 @@ const BadRequestError = require('../utils/BadRequest');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({
-      data: cards,
-    }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -18,9 +16,7 @@ module.exports.addCard = (req, res, next) => {
     link,
     owner: req.user._id,
   })
-    .then((card) => res.send({
-      data: card,
-    }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Некорректные данные'));
@@ -39,7 +35,7 @@ module.exports.deleteCard = (req, res, next) => {
       if (req.user._id !== card.owner.toString()) {
         throw new ForbiddenError('Нельзя удалить чужую карточку!');
       }
-      return card.remove().then(res.send({ data: card }));
+      return card.remove().then(res.send(card));
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -60,7 +56,7 @@ module.exports.likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
         return;
       }
       throw new NotFoundError('Карточка не найдена');
@@ -84,7 +80,7 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
         return;
       }
       throw new NotFoundError('Карточка не найдена');
