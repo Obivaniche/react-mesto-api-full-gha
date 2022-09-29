@@ -97,26 +97,14 @@ function App() {
     setLoggedIn(false);
   };
 
-  function getInitialCards() {
-    api.getInitialCards()
-      .then(([userCard]) => {
-        setCards(userCard);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  function getUserInfo() {
-    api.getUserInfo()
-      .then(([userData]) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => console.log(err));
-  };
-
   useEffect(() => {
     if (isLoggedIn) {
-      getInitialCards();
-      getUserInfo();
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, userCard]) => {
+          setCurrentUser(userData);
+          setCards(userCard);
+        })
+        .catch((err) => console.log(err));
     }
   }, [isLoggedIn]);
 
@@ -224,7 +212,7 @@ function App() {
 
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header 
+        <Header
           userEmail={userEmail}
           handleLogOut={handleLogOut}
         />
