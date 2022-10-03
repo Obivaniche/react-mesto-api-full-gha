@@ -39,35 +39,35 @@ function App() {
     about: '...',
   });
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
-  useEffect(() => {
-    if (isLoggedIn) {
+  React.useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token && isLoggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([userData, userCard]) => {
+        .then(([userData, cardData]) => {
           setCurrentUser(userData);
-          setCards(userCard);
+          setCards(cardData);
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     }
   }, [isLoggedIn]);
-
-  function tokenCheck() {
+  
+  React.useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
       auth.getContent(token)
-        .then((res) => {
-          if (res.email) {
-            setUserEmail(res.email);
-            setLoggedIn(true);
-            history.push('/');
-          }
-        })
-        .catch((err) => console.log(err));
+      .then((res) => {
+        if (res) {
+          setUserEmail(res.email);
+          setCurrentUser(res);
+          setLoggedIn(true);
+          history.push('/');
+        } else {
+          localStorage.removeItem('jwt');
+        }
+      })
+        .catch(err => console.log(err));
     }
-  };
+  }, [history]);
 
   function onRegister(email, password) {
     auth.register({ email, password })
@@ -88,15 +88,16 @@ function App() {
 
   function onLogin(email, password) {
     auth.login({ email, password })
-      .then((res) => {
-        if (res) {
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
-          localStorage.setItem('jwt', res.token);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         setIsSuccess(false)
         setIsInfoTooltipOpen(true)
       });

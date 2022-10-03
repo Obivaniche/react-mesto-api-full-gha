@@ -12,7 +12,7 @@ module.exports.auth = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : '939a8dbf-3639-4365-9b91-f8dc371b30ff');
   } catch (err) {
     next(new Unauthorized('Необходима авторизация'));
     return;

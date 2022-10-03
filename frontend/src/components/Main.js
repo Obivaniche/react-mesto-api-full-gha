@@ -5,7 +5,6 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
 
     const currentUser = useContext(CurrentUserContext);
-    console.log(cards);
 
     return (
         <div className="content">
