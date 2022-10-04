@@ -10,11 +10,10 @@ class Auth {
     return Promise.reject(`Ошибка: ${res.status}`);
   };
 
-  login({ email, password }) {
+  login({email, password}) {
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password })
@@ -22,7 +21,7 @@ class Auth {
       .then((res) => this._checkResponse(res))
   };
 
-  register({ email, password }) {
+  register({email, password}) {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: {
@@ -40,10 +39,13 @@ class Auth {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`
       },
     })
       .then((res) => this._checkResponse(res))
+      .then(data => {
+        return data;
+      })
   }
 };
 

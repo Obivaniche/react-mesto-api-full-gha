@@ -39,35 +39,21 @@ function App() {
     about: '...',
   });
 
-  React.useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token && isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([userData, cardData]) => {
-          setCurrentUser(userData);
-          setCards(cardData);
-        })
-        .catch(err => console.log(err));
-    }
-  }, [isLoggedIn]);
-  
-  React.useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      auth.getContent(token)
+  function onLogin(email, password) {
+    auth.login({ email, password })
       .then((res) => {
         if (res) {
-          setUserEmail(res.email);
-          setCurrentUser(res);
           setLoggedIn(true);
+          setUserEmail(email);
           history.push('/');
-        } else {
-          localStorage.removeItem('jwt');
+          localStorage.setItem('jwt', res.token);
         }
       })
-        .catch(err => console.log(err));
-    }
-  }, [history]);
+      .catch(() => {
+        setIsSuccess(false)
+        setIsInfoTooltipOpen(true)
+      });
+  };
 
   function onRegister(email, password) {
     auth.register({ email, password })
@@ -86,28 +72,41 @@ function App() {
       });
   };
 
-  function onLogin(email, password) {
-    auth.login({ email, password })
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
+  function tokenCheck() {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      auth.getContent(token)
+        .then((res) => {
+          if (res) {
+            setUserEmail(res.email)
+          };
           setLoggedIn(true);
-          setUserEmail(email);
           history.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-        setIsSuccess(false)
-        setIsInfoTooltipOpen(true)
-      });
+        })
+        .catch((err) => console.log(err));
+    }
   };
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   function handleLogOut() {
     localStorage.removeItem('jwt');
     history.push('/sign-in');
     setLoggedIn(false);
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userData, userCard]) => {
+          setCurrentUser(userData);
+          setCards(userCard);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   function handleConfirmCardDelete(card) {
     setCardToDelete(card);

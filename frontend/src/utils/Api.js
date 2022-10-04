@@ -1,7 +1,10 @@
 class Api {
-
-    constructor({ BASE_URL }) {
-        this._BASE_URL = BASE_URL;
+    constructor({
+        url,
+        headers
+    }) {
+        this._url = url;
+        this._headers = headers;
     };
 
     _checkResponse(res) {
@@ -13,99 +16,86 @@ class Api {
     };
 
     getUserInfo() {
-        return fetch(`${this._BASE_URL}/users/me`, {
+        return fetch(`${this._url}/users/me`, {
             method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
-        }).then(this._checkResponse);
-    };
-
-    getInitialCards() {
-        return fetch(`${this._BASE_URL}/cards`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
-        }).then(this._checkResponse);
+            headers: this._headers,
+        })
+            .then(this._checkResponse);
     };
 
     editUserInfo(data) {
-        return fetch(`${this._BASE_URL}/users/me`, {
+        return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
+            headers: this._headers,
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
-            })
-        }).then(this._checkResponse);
+            }),
+        })
+            .then(this._checkResponse);
+    };
+   
+    getInitialCards() {
+        return fetch(`${this._url}/cards`, {
+            method: 'GET',
+            headers: this._headers,
+        })
+            .then(this._checkResponse);
     };
 
     addCard(data) {
-        return fetch(`${this._BASE_URL}/cards`, {
+        return fetch(`${this._url}/cards`, {
             method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
-            body: JSON.stringify({
-                name: data.name,
-                link: data.link
-            })
-        }).then(this._checkResponse);
+            headers: this._headers,
+            body: JSON.stringify(data)
+        })
+            .then(this._checkResponse);
     };
 
     deleteCard(id) {
-        return fetch(`${this._BASE_URL}/cards/${id}`, {
+        return fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
-        }).then(this._checkResponse);
+            headers: this._headers
+        })
+            .then(this._checkResponse);
     };
 
     toggleLikeStatus(id, isLiked) {
         if (isLiked) {
-            return fetch(`${this._BASE_URL}/cards/${id}/likes`, {
+            return fetch(`${this._url}/cards/${id}/likes`, {
                 method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-                },
-            }).then(this._checkResponse);
+                headers: this._headers,
+            })
+                .then(this._checkResponse);
         } else {
-            return fetch(`${this._BASE_URL}/cards/${id}/likes`, {
+            return fetch(`${this._url}/cards/${id}/likes`, {
                 method: 'DELETE',
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-                },
-            }).then(this._checkResponse);
+                headers: this._headers,
+            })
+                .then(this._checkResponse);
         }
     };
 
     editAvatar(data) {
-        return fetch(`${this._BASE_URL}/users/me/avatar`, {
+        return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-            },
+            headers: this._headers,
             body: JSON.stringify({
                 avatar: data.avatar
             })
-        }).then(this._checkResponse);
-    }
+        })
+            .then(this._checkResponse);
+    };
 };
 
-export const api = new Api({
-    BASE_URL: 'https://api.obivaniche.nomoredomains.sbs',
-});
+let token = localStorage.getItem('jwt');
 
-export default api;
+const api = new Api({
+    url: 'https://api.obivaniche.nomoredomains.sbs',
+    headers: {
+      'authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  export default api;
