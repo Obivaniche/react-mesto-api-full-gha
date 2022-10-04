@@ -42,14 +42,15 @@ function App() {
   function onLogin(email, password) {
     auth.login({ email, password })
       .then((res) => {
-        if (res) {
+        if (res.token) {
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
           localStorage.setItem('jwt', res.token);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         setIsSuccess(false)
         setIsInfoTooltipOpen(true)
       });
@@ -72,41 +73,40 @@ function App() {
       });
   };
 
-  function tokenCheck() {
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token && isLoggedIn) {
+      Promise.all([api.getUserInfo(token), api.getInitialCards(token)])
+        .then(([userData, cardData]) => {
+          setCurrentUser(userData);
+          setCards(cardData);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [isLoggedIn]);
+  
+  useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
       auth.getContent(token)
-        .then((res) => {
-          if (res) {
-            setUserEmail(res.email)
-          };
+      .then((res) => {
+        if (res) {
+          setUserEmail(res.email);
           setLoggedIn(true);
           history.push('/');
-        })
-        .catch((err) => console.log(err));
+        } else {
+          localStorage.removeItem('jwt');
+        }
+      })
+        .catch(err => console.log(err));
     }
-  };
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
+  }, [history]);
 
   function handleLogOut() {
     localStorage.removeItem('jwt');
     history.push('/sign-in');
     setLoggedIn(false);
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
-        .then(([userData, userCard]) => {
-          setCurrentUser(userData);
-          setCards(userCard);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [isLoggedIn]);
 
   function handleConfirmCardDelete(card) {
     setCardToDelete(card);
