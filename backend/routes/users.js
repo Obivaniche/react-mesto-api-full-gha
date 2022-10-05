@@ -8,11 +8,11 @@ const {
   updateUserAvatar,
 } = require('../controllers/users');
 
-router.get('/', getUsers);
-router.get('/me', getUserMe);
+router.get('/users', getUsers);
+router.get('/users/me', getUserMe);
 
 router.get(
-  '/:userId',
+  '/users/:userId',
   celebrate({
     params: Joi.object().keys({
       userId: Joi.string().length(24).hex(),
@@ -22,7 +22,7 @@ router.get(
 );
 
 router.patch(
-  '/me',
+  '/users/me',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30).required(),
@@ -33,7 +33,7 @@ router.patch(
 );
 
 router.patch(
-  '/me/avatar',
+  '/users/me/avatar',
   celebrate({
     body: Joi.object().keys({
       avatar: Joi.string()

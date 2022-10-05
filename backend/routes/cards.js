@@ -8,10 +8,10 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
-router.get('/', getCards);
+router.get('/cards', getCards);
 
 router.post(
-  '/',
+  '/cards',
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
@@ -21,14 +21,14 @@ router.post(
   addCard,
 );
 
-router.delete('/:cardId', celebrate({
+router.delete('/cards/:cardId', celebrate({
   params: {
     cardId: Joi.string().alphanum().length(24).hex(),
   },
 }), deleteCard);
 
 router.put(
-  '/:cardId/likes',
+  '/cards/:cardId/likes',
   celebrate({
     params: Joi.object().keys({
       cardId: Joi.string().length(24).hex(),
@@ -38,7 +38,7 @@ router.put(
 );
 
 router.delete(
-  '/:cardId/likes',
+  '/cards/:cardId/likes',
   celebrate({
     params: Joi.object().keys({
       cardId: Joi.string().length(24).hex(),
