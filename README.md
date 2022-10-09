@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP 51.250.105.144
+IP 51.250.26.232
 
 Frontend https://obivaniche.nomoredomains.sbs/
 
